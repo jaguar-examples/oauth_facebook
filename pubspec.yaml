@@ -1,0 +1,21 @@
+name: oauth_facebook
+description: >
+            Example showcasing facebook oauth Signup, Login and session management using jaguar_oauth
+            and jaguar_auth
+version: 0.0.1
+author: Ravi Teja Gudapati <tejainece@gmail.com>
+homepage: https://www.example.com
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  jaguar: '>=0.3.2 <0.4.0'
+  jaguar_reflect: '>=0.3.0 <0.4.0'
+  jaguar_auth: '>=0.3.0 <0.4.0'
+  jaguar_session: '>=0.3.0 <0.4.0'
+  jaguar_oauth: '>=0.0.1 <0.1.0'
+  jaguar_facebook_client: '>=0.0.4 <0.1.0'
+
+dev_dependencies:
+  test: '>=0.12.0 <0.13.0'
