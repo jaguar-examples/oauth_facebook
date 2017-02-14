@@ -20,6 +20,9 @@ dependencies:
     path: ../jaguar_oauth_facebook
   jaguar_serializer:
   jaguar_docstore:
+  jaguar_mongo:
+  mongo_dart:
+  jaguar_serializer_mongo:
 
 dev_dependencies:
   test: '>=0.12.0 <0.13.0'

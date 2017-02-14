@@ -24,7 +24,7 @@ class User implements UserModel, FacebookUserModel {
   String fbToken;
 
   /// Token to refresh user's facebook account token [fbToken]
-  //TODO needed? String fbRefreshToken;
+  String fbRefreshToken;
 
   /// Facebook ID of the user
   String fbId;
