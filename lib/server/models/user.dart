@@ -1,7 +1,10 @@
 library server.models.user;
 
+import 'package:jaguar_auth/jaguar_auth.dart';
+import 'package:jaguar_oauth_facebook/jaguar_oauth_facebook.dart';
+
 /// User model
-class User {
+class User implements UserModel, FacebookUserModel {
   /// ID for the user in the database
   String id;
 
@@ -10,6 +13,8 @@ class User {
 
   /// User's email
   String email;
+
+  String password;
 
   String dateOfBirth;
 
@@ -23,4 +28,11 @@ class User {
 
   /// Facebook ID of the user
   String fbId;
+
+  String get authenticationId => email;
+
+  String get authenticationKeyword => password;
+
+  //TODO use id instead
+  String get authorizationId => email;
 }
