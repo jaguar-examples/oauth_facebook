@@ -20,14 +20,18 @@ part 'user_manager.dart';
 part 'fb_config.dart';
 part 'group_auth.dart';
 part 'group_fb.dart';
+part 'group_user.dart';
 
 final UserSerializer _userSerializer = new UserSerializer();
 
 @Api(path: '/api')
 class MyApi {
   @Group(path: '/auth')
-  final FbAuthRoutes fbAuth = new FbAuthRoutes();
+  final AuthRoutes auth = new AuthRoutes();
 
   @Group(path: '/fb')
-  final AuthRoutes auth = new AuthRoutes();
+  final FbAuthRoutes fbAuth = new FbAuthRoutes();
+
+  @Group(path: '/user')
+  final UserRoutes user = new UserRoutes();
 }

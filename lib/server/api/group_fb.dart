@@ -9,13 +9,13 @@ part of oauth_facebook.server.api;
   #sessionManager: const MakeParamFromMethod(#sessionManager)
 })
 class FbAuthRoutes {
-  @Get(path: '/fb/authreq')
+  @Get(path: '/authreq')
   @WrapOAuth2Req(null, makeParams: const {
     #config: const MakeParamFromMethod(#facebook),
   })
   void fbAuthReq() {}
 
-  @Get(path: '/fb/authorized', mimeType: 'application/json')
+  @Get(path: '/authorized', mimeType: 'application/json')
   @WrapOAuth2Authorized(null, makeParams: const {
     #config: const MakeParamFromMethod(#facebook),
   })

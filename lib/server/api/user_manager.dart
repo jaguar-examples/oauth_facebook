@@ -9,7 +9,7 @@ class MongoUserManager implements FacebookModelManager {
       _store.getByEmail(authenticationId);
 
   Future<User> fetchModelByAuthorizationId(String authorizationId) =>
-      _store.getByFbId(authorizationId);
+      _store.getById(authorizationId);
 
   Future<User> authenticate(String authId, String keyword) async {
     User user = await fetchModelByAuthenticationId(authId);

@@ -12,7 +12,7 @@ abstract class _$UserSerializer implements MapSerializer<User> {
     Map ret = new Map();
     if (model != null) {
       if (model.id != null) {
-        ret["_id"] = new MongoId(#id).to(model.id);
+        ret["id"] = model.id;
       }
       if (model.name != null) {
         ret["name"] = model.name;
@@ -58,7 +58,7 @@ abstract class _$UserSerializer implements MapSerializer<User> {
     if (model is! User) {
       model = createModel();
     }
-    model.id = new MongoId(#id).from(map["_id"]);
+    model.id = map["id"];
     model.name = map["name"];
     model.email = map["email"];
     model.password = map["password"];

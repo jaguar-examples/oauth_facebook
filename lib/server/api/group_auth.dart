@@ -11,15 +11,16 @@ part of oauth_facebook.server.api;
 class AuthRoutes {
   @Post(path: '/signup')
   @WrapDecodeJsonMap()
-  Future<Null> signup(@Input(DecodeJsonMap) Map body) async {
+  Future<Null> signup(
+      @Input(DecodeJsonMap) Map body, @Input(MongoDb) Db db) async {
     User user = _userSerializer.fromMap(body);
-    UserStore _store;
     //TODO: validate
+    UserStore _store = new MongoUserStore(db);
     await _store.create(user);
   }
 
   @Post(path: '/login')
-  @WrapBasicAuth(makeParams: const <Symbol, MakeParam>{
+  @WrapUsernamePasswordJsonAuth(null, makeParams: const <Symbol, MakeParam>{
     #modelManager: const MakeParamFromMethod(#userManager)
   })
   void login(Request req) {}

@@ -33,6 +33,5 @@ class User implements UserModel, FacebookUserModel {
 
   String get authenticationKeyword => password;
 
-  //TODO use id instead
-  String get authorizationId => email;
+  String get authorizationId => id;
 }
