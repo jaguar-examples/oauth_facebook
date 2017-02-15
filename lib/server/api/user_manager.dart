@@ -1,7 +1,9 @@
 part of oauth_facebook.server.api;
 
 class MongoUserManager implements FacebookModelManager {
-  UserStore _store;
+  final UserStore _store;
+
+  MongoUserManager(this._store);
 
   Future<User> fetchModelByAuthenticationId(String authenticationId) =>
       _store.getByEmail(authenticationId);

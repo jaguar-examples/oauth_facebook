@@ -7,7 +7,7 @@ import 'package:oauth_facebook/server/api/api.dart';
 import 'package:logging/logging.dart';
 
 main(List<String> args) async {
-  Settings.parse(args);
+  Settings.parse(args, settingsMap: {'mongo.url': 'localhost:27018'});
   Configuration conf = new Configuration();
   conf.addApi(new JaguarReflected(new MyApi()));
 

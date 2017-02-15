@@ -5,22 +5,18 @@ import 'package:mongo_dart/mongo_dart.dart' as mgo;
 import 'package:oauth_facebook/server/models/user.dart' as model;
 import 'package:oauth_facebook/server/db/common/datastore/user.dart';
 
+import 'package:oauth_facebook/server/db/mongo/serializer/user.dart';
+
 class MongoUserStore implements UserStore {
   mgo.DbCollection _coll;
 
-  UserStore(mgo.Db _db) {
+  MongoUserStore(mgo.Db _db) {
     _coll = _db.collection('user');
   }
 
-  Map _encode(model.User user) {
-    //TODO
-    return {};
-  }
+  Map _encode(model.User user) => serializer.toMap(user);
 
-  model.User _decode(Map map) {
-    //TODO
-    return new model.User();
-  }
+  model.User _decode(Map map) => serializer.fromMap(map);
 
   Future<String> create(model.User user) async {
     final String id = new mgo.ObjectId().toHexString();
@@ -52,4 +48,6 @@ class MongoUserStore implements UserStore {
 
     await _coll.update(mgo.where.id(mgo.ObjectId.parse(id)), upd);
   }
+
+  final UserSerializer serializer = new UserSerializer();
 }

@@ -12,7 +12,7 @@ abstract class _$UserSerializer implements MapSerializer<User> {
     Map ret = new Map();
     if (model != null) {
       if (model.id != null) {
-        ret["_id"] = model.id;
+        ret["_id"] = new MongoId(#id).to(model.id);
       }
       if (model.name != null) {
         ret["name"] = model.name;
@@ -31,6 +31,9 @@ abstract class _$UserSerializer implements MapSerializer<User> {
       }
       if (model.fbToken != null) {
         ret["fbToken"] = model.fbToken;
+      }
+      if (model.fbRefreshToken != null) {
+        ret["fbRefreshToken"] = model.fbRefreshToken;
       }
       if (model.fbId != null) {
         ret["fbId"] = model.fbId;
@@ -55,13 +58,14 @@ abstract class _$UserSerializer implements MapSerializer<User> {
     if (model is! User) {
       model = createModel();
     }
-    model.id = map["_id"];
+    model.id = new MongoId(#id).from(map["_id"]);
     model.name = map["name"];
     model.email = map["email"];
     model.password = map["password"];
     model.dateOfBirth = map["dateOfBirth"];
     model.bio = map["bio"];
     model.fbToken = map["fbToken"];
+    model.fbRefreshToken = map["fbRefreshToken"];
     model.fbId = map["fbId"];
     return model;
   }

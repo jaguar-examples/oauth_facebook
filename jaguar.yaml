@@ -1,2 +1,3 @@
 serializers:
-  - lib/server/serializer/user_serializer.dart
+  - lib/server/db/mongo/serializer/user.dart
+  - lib/common/serializer/user.dart

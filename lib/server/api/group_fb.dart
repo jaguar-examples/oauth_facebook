@@ -2,6 +2,9 @@ part of oauth_facebook.server.api;
 
 /// Routes for facebook signup and login
 @RouteGroup()
+@WrapMongoDb(null, makeParams: const <Symbol, MakeParam> {
+  #mongoUri: const MakeParamFromSettings('mongo.url'),
+})
 @WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
   #sessionManager: const MakeParamFromMethod(#sessionManager)
 })
@@ -25,5 +28,6 @@ class FbAuthRoutes {
 
   CookieSessionManager sessionManager() => new CookieSessionManager();
 
-  FacebookModelManager userManager() => _modelManager;
+  MongoUserManager userManager(@Input(MongoDb) Db db) =>
+      new MongoUserManager(new MongoUserStore(db));
 }
