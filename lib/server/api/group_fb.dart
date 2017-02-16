@@ -9,20 +9,50 @@ part of oauth_facebook.server.api;
   #sessionManager: const MakeParamFromMethod(#sessionManager)
 })
 class FbAuthRoutes {
-  @Get(path: '/authreq')
+  @Get(path: '/req/auth')
   @WrapOAuth2Req(null, makeParams: const {
     #config: const MakeParamFromMethod(#facebook),
   })
-  void fbAuthReq() {}
+  void fbReqAuth() {}
 
-  @Get(path: '/authorized', mimeType: 'application/json')
+  @Get(path: '/authorized/auth', mimeType: 'application/json')
   @WrapOAuth2Authorized(null, makeParams: const {
     #config: const MakeParamFromMethod(#facebook),
   })
   @WrapFacebookAuth(null, makeParams: const {
     #manager: const MakeParamFromMethod(#userManager),
   })
-  void fbAuthorized() {}
+  void fbAuthorizedAuth() {}
+
+  @Get(path: '/req/signup')
+  @WrapOAuth2Req(null, makeParams: const {
+    #config: const MakeParamFromMethod(#facebook),
+  })
+  void fbReqSignup() {}
+
+  @Get(path: '/authorized/signup', mimeType: 'application/json')
+  @WrapOAuth2Authorized(null, makeParams: const {
+    #config: const MakeParamFromMethod(#facebook),
+  })
+  @WrapFacebookAuth(null, makeParams: const {
+    #manager: const MakeParamFromMethod(#userManager),
+  })
+  void fbAuthorizedSignup() {}
+
+  @Get(path: '/req/link')
+  @WrapOAuth2Req(null, makeParams: const {
+    #config: const MakeParamFromMethod(#facebook),
+  })
+  void fbReqLink() {}
+
+  @Get(path: '/authorized/link', mimeType: 'application/json')
+  @WrapOAuth2Authorized(null, makeParams: const {
+    #config: const MakeParamFromMethod(#facebook),
+  })
+  @WrapFacebookAuth(null, makeParams: const {
+    #manager: const MakeParamFromMethod(#userManager),
+  })
+  void fbAuthorizedLink() {}
 
   JaguarOauth2Config facebook() => _facebook;
 
