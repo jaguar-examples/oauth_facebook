@@ -2,22 +2,22 @@ part of oauth_facebook.server.api;
 
 /// Routes to access user
 @RouteGroup()
-@WrapMongoDb(null, makeParams: const <Symbol, MakeParam>{
-  #mongoUri: const MakeParamFromSettings('mongo.url'),
-})
-@WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
-  #sessionManager: const MakeParamFromMethod(#sessionManager)
-})
-@WrapUserAuthoriser(null, makeParams: const <Symbol, MakeParam>{
-  #modelManager: const MakeParamFromMethod(#userManager)
-})
+@Wrap(const [#mongoDB, #sessionInterceptor, #userAuthoriser])
 class UserRoutes {
   @Get()
   @WrapEncodeMapToJson()
   Map get(@Input(UserAuthoriser) User user) => _userSerializer.toMap(user);
 
+  WrapMongoDb mongoDb() => new WrapMongoDb(Settings.getString('mongo.url'));
+
+  WrapSessionInterceptor sessionInterceptor() =>
+      new WrapSessionInterceptor(sessionManager());
+
+  WrapUserAuthoriser userAuthoriser(@Input(MongoDb) Db db) =>
+      new WrapUserAuthoriser(userManager(db));
+
   CookieSessionManager sessionManager() => new CookieSessionManager();
 
-  MongoUserManager userManager(@Input(MongoDb) Db db) =>
+  MongoUserManager userManager(Db db) =>
       new MongoUserManager(new MongoUserStore(db));
 }

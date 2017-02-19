@@ -8,12 +8,12 @@ import 'package:logging/logging.dart';
 
 main(List<String> args) async {
   Settings.parse(args, settingsMap: {'mongo.url': 'mongodb://localhost:27018/oauth_facebook'});
-  Configuration conf = new Configuration();
-  conf.addApi(reflectJaguar(new MyApi()));
+  Jaguar server = new Jaguar();
+  server.addApi(reflectJaguar(new MyApi()));
 
-  conf.log.onRecord.listen((LogRecord rec) {
+  server.log.onRecord.listen((LogRecord rec) {
     print('${rec.level.name}: ${rec.time}: ${rec.message}');
   });
 
-  await serve(conf);
+  await server.serve();
 }

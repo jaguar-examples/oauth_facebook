@@ -12,6 +12,7 @@ import 'package:jaguar_oauth_facebook/jaguar_oauth_facebook.dart';
 import 'package:oauth_facebook/server/db/common/datastore/user.dart';
 import 'package:jaguar_mongo/jaguar_mongo.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:oauth2/oauth2.dart' as oauth2;
 
 import 'package:oauth_facebook/common/serializer/user.dart';
 import 'package:oauth_facebook/server/db/mongo/datastore/user.dart';

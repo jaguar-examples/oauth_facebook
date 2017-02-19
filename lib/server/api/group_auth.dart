@@ -2,12 +2,7 @@ part of oauth_facebook.server.api;
 
 /// Route for signup, login and logout routes
 @RouteGroup()
-@WrapMongoDb(null, makeParams: const <Symbol, MakeParam>{
-  #mongoUri: const MakeParamFromSettings('mongo.url'),
-})
-@WrapSessionInterceptor(makeParams: const <Symbol, MakeParam>{
-  #sessionManager: const MakeParamFromMethod(#sessionManager)
-})
+@Wrap(const [#mongoDB, #sessionInterceptor])
 class AuthRoutes {
   @Post(path: '/signup')
   @WrapDecodeJsonMap()
@@ -20,9 +15,7 @@ class AuthRoutes {
   }
 
   @Post(path: '/login')
-  @WrapUsernamePasswordJsonAuth(null, makeParams: const <Symbol, MakeParam>{
-    #modelManager: const MakeParamFromMethod(#userManager)
-  })
+  @Wrap(const [#usernamePasswordJsonAuth])
   void login(Request req) {}
 
   @Post(path: '/logout')
@@ -30,8 +23,17 @@ class AuthRoutes {
     //TODO logout
   }
 
+  WrapMongoDb mongoDb() => new WrapMongoDb(Settings.getString('mongo.url'));
+
+  WrapSessionInterceptor sessionInterceptor() =>
+      new WrapSessionInterceptor(sessionManager());
+
+  WrapUsernamePasswordJsonAuth usernamePasswordJsonAuth(
+          @Input(MongoDb) Db db) =>
+      new WrapUsernamePasswordJsonAuth(userManager(db));
+
   CookieSessionManager sessionManager() => new CookieSessionManager();
 
-  MongoUserManager userManager(@Input(MongoDb) Db db) =>
+  MongoUserManager userManager(Db db) =>
       new MongoUserManager(new MongoUserStore(db));
 }
