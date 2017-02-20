@@ -12,5 +12,5 @@ abstract class UserStore {
 
   Future<model.User> getByFbId(String fbId);
 
-  Future setFbInfo(String id, String fbId, String token, String refreshToken);
+  Future<Null> setFbInfo(String id, String fbId, String token, String refreshToken);
 }

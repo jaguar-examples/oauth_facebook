@@ -2,7 +2,7 @@ part of oauth_facebook.server.api;
 
 /// Route for signup, login and logout routes
 @RouteGroup()
-@Wrap(const [#mongoDB, #sessionInterceptor])
+@Wrap(const [#mongoDb, #sessionInterceptor])
 class AuthRoutes {
   @Post(path: '/signup')
   @WrapDecodeJsonMap()

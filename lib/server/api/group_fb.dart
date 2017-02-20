@@ -2,7 +2,7 @@ part of oauth_facebook.server.api;
 
 /// Routes for facebook signup and login
 @RouteGroup()
-@Wrap(const [#mongoDB, #sessionInterceptor])
+@Wrap(const [#mongoDb, #sessionInterceptor])
 class FbAuthRoutes {
   @Get(path: '/req/auth')
   @Wrap(const [#oAuth2Req])

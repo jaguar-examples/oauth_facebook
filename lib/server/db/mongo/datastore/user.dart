@@ -40,7 +40,7 @@ class MongoUserStore implements UserStore {
     return _decode(map);
   }
 
-  Future setFbInfo(String id, String fbId, String token, String refreshToken) async {
+  Future<Null> setFbInfo(String id, String fbId, String token, String refreshToken) async {
     final upd = mgo.modify;
     upd.set('fbId', fbId);
     upd.set('fbToken', token);

@@ -2,7 +2,7 @@ part of oauth_facebook.server.api;
 
 /// Routes to access user
 @RouteGroup()
-@Wrap(const [#mongoDB, #sessionInterceptor, #userAuthoriser])
+@Wrap(const [#mongoDb, #sessionInterceptor, #userAuthoriser])
 class UserRoutes {
   @Get()
   @WrapEncodeMapToJson()
